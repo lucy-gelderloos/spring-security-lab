@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="general.html :: headerfiles">
+    <title>App</title>
+</head>
+<body>
+<header th:insert="general.html :: header"> </header>
+<h1>Sign Up!</h1>
+<form action="/signup" method="post">
+
+    <label>First Name</label>
+    <input type="text" name="firstName">
+
+    <br>
+
+    <label>Last Name</label>
+    <input type="text" name="lastName">
+
+    <br>
+
+    <label>Date of Birth</label>
+    <input type="string" name="dateOfBirth">
+<!--    TODO: make date input or do format validation on the string-->
+
+    <br>
+
+    <label>Username</label>
+    <input type="text" name="username">
+
+    <br>
+
+    <label>Nickname</label>
+    <input type="text" name="nickname">
+
+    <br>
+
+    <label>Password</label>
+    <input type="password" name="password">
+
+    <br>
+
+    <label>Bio</label>
+    <input type="textarea" name="userBio">
+
+
+    <input type="submit" value="Sign Up">
+</form>
+</body>
+</html>
