@@ -6,6 +6,7 @@ package com.gelderloos.codefellowship.controllers;
 import com.gelderloos.codefellowship.models.AppUser;
 import com.gelderloos.codefellowship.repositories.AppUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
@@ -44,7 +46,7 @@ public class UserController {
             m.addAttribute("nickname", dinoUser.getNickname());
         }
 
-        return "index.html";
+        return "index";
     }
 
     @GetMapping("/login")
@@ -62,21 +64,26 @@ public class UserController {
         return "secretSauce";
     }
 
-
     @PostMapping("/test")
     public RedirectView testUser(){
         String hashedPassword = passwordEncoder.encode("password");
-        AppUser newUser = new AppUser("lemi", hashedPassword, "Pound Cake");
+        AppUser newUser = new AppUser("Pippin", hashedPassword, "pip-pop","Pippin","Took","1/15/18","I'm a cat!");
         appUserRepo.save(newUser);
         return new RedirectView("/");
     }
+//
+//    @PostMapping("/login")
+//    public RedirectView logInUser(String username, String password){
+//        authWithHttpServletRequest(username, password);
+//        return new RedirectView("/");
+//    }
 
     //POST ROUTES
     // signup
     @PostMapping("/signup")
-    public RedirectView createUser(String username, String nickname, String password){
+    public RedirectView createUser(String username, String nickname, String password, String firstName, String lastName, String dateOfBirth, String userBio){
         String hashedPassword = passwordEncoder.encode(password);
-        AppUser newUser = new AppUser(username, hashedPassword, nickname);
+        AppUser newUser = new AppUser(username, hashedPassword, nickname, firstName, lastName, dateOfBirth, userBio);
         appUserRepo.save(newUser);
         // pre auth with HttpServletReq
         authWithHttpServletRequest(username, password);

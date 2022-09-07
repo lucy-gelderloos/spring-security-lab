@@ -1,0 +1,72 @@
+@import "reset.css";
+
+/* Color Theme Swatches in Hex */
+.Fall-1-hex { color: #FBE921; }
+.Fall-2-hex { color: #E6B02A; }
+.Fall-3-hex { color: #FA902D; }
+.Fall-4-hex { color: #E63E17; }
+.Fall-5-hex { color: #FF1768; }
+
+body {
+    background-color: #faf3a2;
+    font-family: 'Archivo', sans-serif;
+    color: #87230c;
+}
+
+main {
+    padding: 25px;
+}
+
+nav {
+    background-color: #FA902D;
+    display: flex;
+    justify-items: end;
+}
+
+h1 {
+    color: #FF1768;
+    text-shadow: 3px 3px 2px #E63E17;
+    font-size: 5em;
+    padding: 15px;
+}
+
+h2 {
+    font-weight: bold;
+    color: #E63E17;
+    font-size: 3em;
+    padding: 15px;
+}
+
+form {
+    background-color: #faf3a2;
+    border-radius: 0px 10px;
+    color:#87230c;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+form * {
+    display: block;
+    margin: 5px 0px;
+}
+
+.mainNavLink {
+    color: #faf3a2;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-decoration: none;
+    padding: 10px;
+}
+
+#submitButton {
+    height:38px;
+    border: 1px solid #E6B02A !important;
+    border-radius:5px;
+}
+
+#submitButton:hover, #submitButton:active, #submitButton:focus {
+    border: 1px solid #E6B02A !important;
+    box-shadow: 0 0 0 0.2rem #E6B02A !important;
+}
+
