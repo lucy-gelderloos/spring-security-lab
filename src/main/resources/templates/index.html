@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
+<head th:insert="general.html :: headerfiles">
+    <title>App</title>
+</head>
+<body>
+<header th:insert="general.html :: header"> </header>
+<h3 th:if="${username != null}" th:text="${'Current user: ' + username + ' with nickname ' + nickname}"></h3>
+<h1>Welcome to my application, the best home for users on the internet!</h1>
+
+<a th:if="!${username}" href="/login">Log In</a>
+<br>
+<a th:if="!${username}" href="/signup">Or Sign Up</a>
+<a th:if="${username}" href="/logout">Log Out</a>
+</body>
+</html>
