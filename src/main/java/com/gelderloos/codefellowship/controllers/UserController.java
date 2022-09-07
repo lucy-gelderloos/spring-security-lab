@@ -40,10 +40,10 @@ public class UserController {
         if (p != null)
         {
             String username = p.getName();
-            AppUser dinoUser = appUserRepo.findByUsername(username);
+            AppUser appUser = appUserRepo.findByUsername(username);
 
             m.addAttribute("username", username);
-            m.addAttribute("nickname", dinoUser.getNickname());
+            m.addAttribute("nickname", appUser.getNickname());
         }
 
         return "index";
