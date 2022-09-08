@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
+<head th:insert="fragments/general.html :: headerfiles">
+    <title>All Posts</title>
+</head>
+<body>
+<header th:insert="fragments/general.html :: header"> </header>
+<h2>All Posts</h2>
+
+<div th:each="post : ${postList}">
+    <h3 th:text="${post.postAuthorUserName}"> </h3>
+    <p th:text="${post.postContent}"> </p>
+</div>
+
+
+<form class="addPostForm" action="/posts" method="post">
+    <fieldset>
+        <legend>Add a post</legend>
+        <label>Post content</label>
+        <input class="addPostForm" type="text" name="postContent"/>
+        <input type="hidden" name="postAuthorUserName" th:value="${username}"/>
+        <input id ="submitButton" type="submit" value="Add Post">
+    </fieldset>
+</form>
+
+</body>
+</html>

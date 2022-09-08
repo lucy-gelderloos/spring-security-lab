@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/general.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+<header th:insert="fragments/general.html :: header"> </header>
+<h1>Error!</h1>
+<span th:if="${exception}" th:text="${message}"></span>
+</body>
+</html>

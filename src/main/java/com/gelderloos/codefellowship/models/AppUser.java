@@ -3,16 +3,12 @@ package com.gelderloos.codefellowship.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
-//TODO: Step1A: Make user model (NOT called "User"!)
-// Don't forget the Entity anno
 @Entity
-//TODO: Step 4: Implement UserDetails
+
 public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +21,10 @@ public class AppUser implements UserDetails {
     private String lastName;
     private String dateOfBirth;
     private String bio;
+    private String profilePicUrl;
+
+    @OneToMany(mappedBy = "appUser")
+    private List<AppPost> postsByUser;
 
     protected AppUser() {
     }
@@ -37,6 +37,7 @@ public class AppUser implements UserDetails {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
+        this.profilePicUrl = "../static/images/cf-logo-gray.png";
     }
 
     public Long getId() {
@@ -126,5 +127,21 @@ public class AppUser implements UserDetails {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
+    }
+
+    public List<AppPost> getPostsByUser() {
+        return postsByUser;
+    }
+
+    public void setPostsByUser(List<AppPost> postsByUser) {
+        this.postsByUser = postsByUser;
     }
 }
