@@ -7,8 +7,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-// TODO: Step 3: Make a UserDetailsServiceImpl that implements UserDetailsService
-// Don't forget @Service anno
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

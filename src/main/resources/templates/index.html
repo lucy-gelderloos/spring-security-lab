@@ -1,24 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:insert="general.html :: headerfiles">
-<!--    <link rel="stylesheet" href="../static/css/styles.css" />-->
     <title>CodeFellowship</title>
 </head>
 <body>
-<!--<header th:insert="general.html :: header">-->
-<header>
-    <h1>Code Fellowship</h1>
-    <h2 th:if="${username != null}" th:text="${'Current user: ' + username + ' (' + nickname + ')'}"></h2>
-    <nav>
-        <a th:if="!${username}" href="/login" class="mainNavLink">Log In</a>
-        <a th:if="!${username}" href="/signup" class="mainNavLink">Sign Up</a>
-        <a th:if="${username}" href="/logout" class="mainNavLink">Log Out</a>
-    </nav>
+<header th:insert="general.html :: header">
 </header>
 <h1>Welcome to my application, the best home for users on the internet!</h1>
-
-
-<!--TODO: exempt css from authorization so it shows when people aren't logged in-->
 
 </body>
 </html>
