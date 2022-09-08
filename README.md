@@ -22,15 +22,11 @@ In codefellowship folder, run './gradlew build', then './gradlew bootRun'. By de
 ## Lab 17 Feature Tasks
 
 - [ ] Upon logging in, the user should be directed to a profile page with their user details and a profile picture (default image for now)
-- [ ] All logged-in users should be able to see all other users' details at a route similar to `/users/{id}`
-- [ ] Create a Post entity with properties of author, post body, and timestamp
-- [ ] A logged-in user should be able to create a post, which should be associated with that user
+- [x] All logged-in users should be able to see all other users' details at a route similar to `/users/{id}`
+- [x] Create a Post entity with properties of author, post body, and timestamp
+- [x] A logged-in user should be able to create a post, which should be associated with that user
 - [ ] Each user's posts should be visible on their profile page
-- [ ] The site should use reusable fragments for its information
+- [x] The site should use reusable fragments for its information
 - [ ] The site should have a non-whitelabel error page that gives the error code and a brief message
-- [ ] Stretch: Users should be able to edit their own profiles, but not other users' profiles
+- [x] Stretch: Users should be able to edit their own profiles, but not other users' profiles
 - [ ] Stretch: An admin user should be able to edit all users' profiles
-
-### TODOs:
-
-- add profile pic url property to user

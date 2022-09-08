@@ -12,15 +12,18 @@
 <body>
 <header th:fragment="header">
   <h1>Code Fellowship</h1>
-  <h2 th:if="${username != null}" th:text="${'Current user: ' + username + ' (' + nickname + ')'}"></h2>
+
   <nav>
     <a th:if="!${username}" href="/login" class="mainNavLink">Log In</a>
     <a th:if="!${username}" href="/signup" class="mainNavLink">Sign Up</a>
+    <a th:if="${username}" href="/users" class="mainNavLink">Users</a>
+    <a th:if="${username}" href="/posts" class="mainNavLink">Posts</a>
     <a th:if="${username}" href="/logout" class="mainNavLink">Log Out</a>
+    <div id="userNameNav"  th:fragment="userName" th:if="${username != null}" th:text="${'Hi, ' + nickname + '!'}"></div>
   </nav>
 </header>
 
-<div th:fragment="userName"></div>
+<div></div>
 <footer th:fragment="footer">
 </footer>
 </body>

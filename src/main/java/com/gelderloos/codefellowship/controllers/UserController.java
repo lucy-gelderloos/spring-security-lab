@@ -80,7 +80,14 @@ public class UserController {
     }
 
     @GetMapping(value = {"/users"})
-    public String usersGet(Model model) {
+    public String usersGet(Principal p, Model model) {
+        if (p != null) { // not strictly required IF your WebSecurityConfig is correct
+            String username = p.getName();
+            AppUser appUser = appUserRepository.findByUsername(username);
+
+            model.addAttribute("username", username);
+            model.addAttribute("nickname", appUser.getNickname());
+        }
         List<AppUser> userList = appUserRepository.findAll();
         model.addAttribute("userList",userList);
         return "users";
@@ -94,37 +101,47 @@ public class UserController {
 
             m.addAttribute("username", username);
             m.addAttribute("nickname", appUser.getNickname());
+            m.addAttribute("userId", appUser.getId());
         }
 
         AppUser dbUser = appUserRepository.findById(id).orElseThrow();
         m.addAttribute("dbUserUsername", dbUser.getUsername());
         m.addAttribute("dbUserNickname", dbUser.getNickname());
         m.addAttribute("dbUserId", dbUser.getId());
+        m.addAttribute("dbUserFirstName", dbUser.getFirstName());
+        m.addAttribute("dbUserLastName", dbUser.getLastName());
+        m.addAttribute("dbUserDateOfBirth", dbUser.getDateOfBirth());
+        m.addAttribute("dbUserBio", dbUser.getBio());
 
+//        List<AppPost> postList = appPostRepository.findAllByAuthor(dbUser.getUsername());
         m.addAttribute("testDate", LocalDateTime.now());
 
-        return "user-info";
+        return "profile";
     }
 
-//    @GetMapping("/posts")
-//    public String getAllPosts(Model m, Principal p) {
-//
-//        if (p != null) {
-//            String username = p.getName();
-//            AppUser appUser = appUserRepository.findByUsername(username);
-//
-//            m.addAttribute("username", username);
-//            m.addAttribute("appUserId", appUser.getId());
-//        }
-//        return "posts";
-//    }
-//
-//    @PostMapping("/posts")
-//    public RedirectView createPost(String postAuthorId, String postContent){
-//        AppPost newPost = new AppPost(postAuthorId,postContent);
-//        appPostRepository.save(newPost);
-//        return new RedirectView("/posts");
-//    }
+    @GetMapping("/posts")
+    public String getAllPosts(Model m, Principal p) {
+
+        if (p != null) {
+            String username = p.getName();
+            AppUser appUser = appUserRepository.findByUsername(username);
+
+            m.addAttribute("username", username);
+            m.addAttribute("appUserId", appUser.getId());
+            m.addAttribute("nickname", appUser.getNickname());
+        }
+
+        List<AppPost> postList = appPostRepository.findAll();
+        m.addAttribute("postList",postList);
+        return "posts";
+    }
+
+    @PostMapping("/posts")
+    public RedirectView createPost(String postAuthorUserName, String postContent){
+        AppPost newPost = new AppPost(postAuthorUserName,postContent);
+        appPostRepository.save(newPost);
+        return new RedirectView("/posts");
+    }
 
     @PostMapping("/test")
     public RedirectView testUser() {
@@ -149,15 +166,20 @@ public class UserController {
     public RedirectView loginUser(String username, String password) {
         authWithHttpServletRequest(username, password);
         AppUser appUser = appUserRepository.findByUsername(username);
-        return new RedirectView("/users");
+        Long id = appUser.getId();
+        return new RedirectView("/users" + 1);
     }
 
     @PutMapping("/users/{id}")
-    public RedirectView editUserInfo(Model m, Principal p, @PathVariable Long id, String username, String nickname, RedirectAttributes redir) {
+    public RedirectView editUserInfo(Model m, Principal p, @PathVariable Long id, String username, String nickname, String firstName, String lastName, String dateOfBirth, String userBio, RedirectAttributes redir) {
         if (p != null && p.getName().equals(username)) {
             AppUser newUser = appUserRepository.findById(id).orElseThrow();
             newUser.setUsername(username);
             newUser.setNickname(nickname);
+            newUser.setFirstName(firstName);
+            newUser.setLastName(lastName);
+            newUser.setDateOfBirth(dateOfBirth);
+            newUser.setBio(userBio);
             appUserRepository.save(newUser);
         } else {
             redir.addFlashAttribute("errorMessage", "Cannot edit another user's info");

@@ -38,8 +38,8 @@ public class AppPost {
         return postAuthorUserName;
     }
 
-    public void setPostAuthorUserName(String postAuthorUserId) {
-        this.postAuthorUserName = postAuthorUserId;
+    public void setPostAuthorUserName(String postAuthorUserName) {
+        this.postAuthorUserName = postAuthorUserName;
     }
 
     public String getPostContent() {

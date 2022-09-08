@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/general.html :: headerfiles">
+    <title>User Profile</title>
+</head>
+<body>
+<header th:insert="fragments/general.html :: header"> </header>
+<h1 th:text="${'User info for user id: ' + dbUserId}"></h1>
+<div th:replace="/fragments/error-fragment :: user-error"></div>
+<img src="../images/cf-logo-gray.png" alt="default profile image" width="150px"/>
+<form th:action="${'/users/' + dbUserId}" th:method="PUT">
+    <label>Username</label>
+    <input th:value="${dbUserUsername}" type="text" name="username" th:disabled="${!userId.equals(dbUserId)}">
+    <label>Nickname</label>
+    <input th:value="${dbUserNickname}" type="text" name="nickname" th:disabled="${!userId.equals(dbUserId)}">
+    <label>First Name</label>
+    <input th:value="${dbUserFirstName}" type="text" name="firstName" th:disabled="${!userId.equals(dbUserId)}">
+    <label>Last Name</label>
+    <input th:value="${dbUserLastName}" type="text" name="lastName" th:disabled="${!userId.equals(dbUserId)}">
+    <label>Birthday</label>
+    <input th:value="${dbUserDateOfBirth}" type="text" name="dateOfBirth" th:disabled="${!userId.equals(dbUserId)}">
+    <label>Bio</label>
+    <input th:value="${dbUserBio}" type="text" name="bio" th:disabled="${!userId.equals(dbUserId)}">
+
+    <input th:if="${userId.equals(dbUserId)}" type="submit" value="Edit User info">
+</form>
+<h2>Posts</h2>
+
+<table>
+    <thead>
+    <td>Date</td>
+    <td>&nbsp;</td>
+    </thead>
+    <tr th:each="post : ${postsByUser}">
+        <td>post date</td>
+        <td th:text="postBody"></td>
+
+    </tr>
+</table>
+
+<div th:text="${'testDate: ' + #temporals.format(testDate, 'MMMM d')}"></div>
+</body>
+</html>
