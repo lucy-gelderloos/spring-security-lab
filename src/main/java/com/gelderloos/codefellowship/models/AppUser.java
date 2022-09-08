@@ -3,16 +3,12 @@ package com.gelderloos.codefellowship.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
-//TODO: Step1A: Make user model (NOT called "User"!)
-// Don't forget the Entity anno
 @Entity
-//TODO: Step 4: Implement UserDetails
+
 public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +21,9 @@ public class AppUser implements UserDetails {
     private String lastName;
     private String dateOfBirth;
     private String bio;
+
+    @OneToMany(mappedBy = "appUser")
+    private List<AppPost> postsByUser;
 
     protected AppUser() {
     }

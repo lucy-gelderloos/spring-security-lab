@@ -1,6 +1,6 @@
 package com.gelderloos.codefellowship.configs;
 
-import com.gelderloos.codefellowship.repositories.AppUserRepo;
+import com.gelderloos.codefellowship.repositories.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    AppUserRepo appUserRepo;
+    AppUserRepository appUserRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return (UserDetails) appUserRepo.findByUsername(username);
+        return (UserDetails) appUserRepository.findByUsername(username);
     }
 }
