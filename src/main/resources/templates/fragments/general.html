@@ -12,8 +12,8 @@
 <body>
 <header th:fragment="header">
   <h1>Code Fellowship</h1>
+  <h2 th:if="${username != null}" th:text="${'Current user: ' + username + ' (' + nickname + ')'}"></h2>
   <nav>
-    <h3 th:if="${username != null}" th:text="${'Current user: ' + username + ' with nickname ' + nickname}"></h3>
     <a th:if="!${username}" href="/login" class="mainNavLink">Log In</a>
     <a th:if="!${username}" href="/signup" class="mainNavLink">Sign Up</a>
     <a th:if="${username}" href="/logout" class="mainNavLink">Log Out</a>

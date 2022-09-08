@@ -3,7 +3,9 @@ package com.gelderloos.codefellowship.controllers;
 //TODO: Step 2: Make a controller
 // Don't forget @Controller anno
 
+import com.gelderloos.codefellowship.models.AppPost;
 import com.gelderloos.codefellowship.models.AppUser;
+import com.gelderloos.codefellowship.repositories.AppPostRepository;
 import com.gelderloos.codefellowship.repositories.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,14 +20,19 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class UserController {
     // Autowire user repo
     @Autowired
     AppUserRepository appUserRepository;
+
+    @Autowired
+    AppPostRepository appPostRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -72,12 +79,11 @@ public class UserController {
         return "secretSauce";
     }
 
-    @PostMapping("/test")
-    public RedirectView testUser() {
-        String hashedPassword = passwordEncoder.encode("password");
-        AppUser newUser = new AppUser("Pippin", hashedPassword, "pip-pop", "Pippin", "Took", "1/15/18", "I'm a cat!");
-        appUserRepository.save(newUser);
-        return new RedirectView("/");
+    @GetMapping(value = {"/users"})
+    public String usersGet(Model model) {
+        List<AppUser> userList = appUserRepository.findAll();
+        model.addAttribute("userList",userList);
+        return "users";
     }
 
     @GetMapping("/users/{id}")
@@ -100,6 +106,34 @@ public class UserController {
         return "user-info";
     }
 
+//    @GetMapping("/posts")
+//    public String getAllPosts(Model m, Principal p) {
+//
+//        if (p != null) {
+//            String username = p.getName();
+//            AppUser appUser = appUserRepository.findByUsername(username);
+//
+//            m.addAttribute("username", username);
+//            m.addAttribute("appUserId", appUser.getId());
+//        }
+//        return "posts";
+//    }
+//
+//    @PostMapping("/posts")
+//    public RedirectView createPost(String postAuthorId, String postContent){
+//        AppPost newPost = new AppPost(postAuthorId,postContent);
+//        appPostRepository.save(newPost);
+//        return new RedirectView("/posts");
+//    }
+
+    @PostMapping("/test")
+    public RedirectView testUser() {
+        String hashedPassword = passwordEncoder.encode("password");
+        AppUser newUser = new AppUser("Pippin", hashedPassword, "pip-pop", "Pippin", "Took", "1/15/18", "I'm a cat!");
+        appUserRepository.save(newUser);
+        return new RedirectView("/");
+    }
+
     @PostMapping("/signup")
     public RedirectView createUser(String username, String nickname, String password, String firstName, String lastName, String dateOfBirth, String userBio) {
         String hashedPassword = passwordEncoder.encode(password);
@@ -107,7 +141,15 @@ public class UserController {
         appUserRepository.save(newUser);
         // pre auth with HttpServletReq
         authWithHttpServletRequest(username, password);
-        return new RedirectView("/");
+        AppUser appUser = appUserRepository.findByUsername(username);
+        return new RedirectView("/users");
+    }
+
+    @PostMapping("/login")
+    public RedirectView loginUser(String username, String password) {
+        authWithHttpServletRequest(username, password);
+        AppUser appUser = appUserRepository.findByUsername(username);
+        return new RedirectView("/users");
     }
 
     @PutMapping("/users/{id}")

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head th:insert="fragments/general.html :: headerfiles">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>User Info</title>
 </head>
 <body>
-<div th:replace="/fragments/nav-header :: site-user"></div>
+<header th:insert="fragments/general.html :: header"> </header>
 <h1 th:text="${'User info for user id: ' + dbUserId}"></h1>
 <div th:replace="/fragments/error-fragment :: user-error"></div>
 

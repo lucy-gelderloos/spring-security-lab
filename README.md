@@ -18,3 +18,19 @@ In codefellowship folder, run './gradlew build', then './gradlew bootRun'. By de
 - [x] The home page, login, and signup pages should be accessible to users who are not logged in
 - [x] The site should use templates to display its information
 - [x] The site should be well-styled and attractive (**Note:** static content is not being served correctly, so the styling doesn't show up until the user is logged in.)
+
+## Lab 17 Feature Tasks
+
+- [ ] Upon logging in, the user should be directed to a profile page with their user details and a profile picture (default image for now)
+- [ ] All logged-in users should be able to see all other users' details at a route similar to `/users/{id}`
+- [ ] Create a Post entity with properties of author, post body, and timestamp
+- [ ] A logged-in user should be able to create a post, which should be associated with that user
+- [ ] Each user's posts should be visible on their profile page
+- [ ] The site should use reusable fragments for its information
+- [ ] The site should have a non-whitelabel error page that gives the error code and a brief message
+- [ ] Stretch: Users should be able to edit their own profiles, but not other users' profiles
+- [ ] Stretch: An admin user should be able to edit all users' profiles
+
+### TODOs:
+
+- add profile pic url property to user

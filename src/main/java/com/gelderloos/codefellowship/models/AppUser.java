@@ -21,6 +21,7 @@ public class AppUser implements UserDetails {
     private String lastName;
     private String dateOfBirth;
     private String bio;
+    private String profilePicUrl;
 
     @OneToMany(mappedBy = "appUser")
     private List<AppPost> postsByUser;
@@ -36,6 +37,7 @@ public class AppUser implements UserDetails {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
+        this.profilePicUrl = "../static/images/cf-logo-gray.png";
     }
 
     public Long getId() {
@@ -125,5 +127,21 @@ public class AppUser implements UserDetails {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
+    }
+
+    public List<AppPost> getPostsByUser() {
+        return postsByUser;
+    }
+
+    public void setPostsByUser(List<AppPost> postsByUser) {
+        this.postsByUser = postsByUser;
     }
 }

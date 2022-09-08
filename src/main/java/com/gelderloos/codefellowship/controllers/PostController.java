@@ -25,8 +25,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public String getAllPosts(HttpServletRequest request, Model model) {
-        // https://stackoverflow.com/questions/24677949/why-session-is-not-null-after-session-invalidate-in-java
-        // not sure how to set this up to check if the suer is not logged in - I thought the code below would return false if the session has been invalidated, but it doesn't seem to be working
+
         if(request.getSession(false) == null) {
             return "index";
         } else {

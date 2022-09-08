@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:insert="general.html :: headerfiles">
+<head th:insert="fragments/general.html :: headerfiles">
     <title>Log In</title>
 </head>
 <body>
-<header th:insert="general.html :: header"> </header>
+<header th:insert="fragments/general.html :: header"> </header>
 <h1>Log In</h1>
 <h2>(or sign up <a href="/signup">here</a>)</h2>
 <form action="/login" method="POST">
